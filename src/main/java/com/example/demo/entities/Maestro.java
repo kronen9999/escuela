@@ -17,23 +17,23 @@ public class Maestro {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_MAESTRO",nullable = false)
-    Long id;
+    private Long id;
 
     @Column(name = "NOMBRE",nullable = false,length = 50)
-    String nombre;
+    private String nombre;
 
 
     @Column(name = "APELLIDO_PATERNO",nullable = false,length = 50)
-    String apellidoPaterno;
+    private String apellidoPaterno;
 
-    @Column(name = "APELLIDO_Materno",nullable = false,length = 50)
-    String apellidoMaterno;
+    @Column(name = "APELLIDO_MATERNO",nullable = false,length = 50)
+    private String apellidoMaterno;
 
     @Column(name = "EMAIL",nullable = false,length = 100,unique = true)
-    String email;
+    private String email;
 
     @Column(name = "TELEFONO",nullable = false,length = 10,unique = true)
-    String telefono;
+    private String telefono;
 
 
 
