@@ -31,7 +31,7 @@ public class Curso {
 
     @Column(name = "CREDITOS",nullable = false)
     @Min(0)
-    private  Short creditos ;
+    private  Integer creditos ;
 
 
 

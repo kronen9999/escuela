@@ -1,4 +1,4 @@
-package com.example.demo.dto.maestro.alumno.aula;
+package com.example.demo.dto.alumno.aula;
 
 public record AulaResponse(
 
