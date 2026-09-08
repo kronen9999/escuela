@@ -6,6 +6,9 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -35,6 +38,9 @@ public class Maestro {
     @Column(name = "TELEFONO",nullable = false,length = 10,unique = true)
     private String telefono;
 
+    @Builder.Default
+    @OneToMany (mappedBy = "maestro",fetch = FetchType.LAZY)
+    private List <Grupo> grupos = new ArrayList<>();
 
 
 }

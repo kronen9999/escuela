@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -40,7 +42,11 @@ public class Alumno {
     private String matricula;
 
     @Column(name = "FECHA_INGRESO",length = 10)
-    private LocalDate fecha;
+    private LocalDate fechaIngreso=LocalDate.now();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "alumno",fetch = FetchType.LAZY)
+    private List<Inscripcion> inscripciones = new ArrayList<>();
 
 
 }
