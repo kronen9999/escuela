@@ -50,7 +50,7 @@ public class MaestroServiceImp  implements  MaestroService{
 
         validarDatosUnicos(request);
 
-        Maestro maestro=maestroMapper.requestAEntiddad(request);
+        Maestro maestro=maestroMapper.requestAEntidad(request);
 
         maestroRepository.save(maestro);
 

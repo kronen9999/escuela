@@ -14,46 +14,55 @@ import java.util.List;
 @AllArgsConstructor
 public class MaestroMapper implements  CommonMapper<MaestroRequest, MaestroResponse, Maestro> {
 
+
+
     private final CursoMapper cursoMapper;
 
     @Override
-    public Maestro requestAEntiddad(MaestroRequest request) {
-        if (request==null) return null;
+    public Maestro requestAEntidad(MaestroRequest request) {
+        if (request == null) return null;
 
-        return Maestro.builder().nombre(
-                request.nombre().trim())
-                .apellidoPaterno(request.apellidoPaterno().trim())
-                .apellidoMaterno(request.apellidoMaterno().trim())
-                .email(request.email().trim())
-                .telefono(request.telefono().trim())
+        return Maestro.builder()
+                .nombre(normalizarTexto(request.nombre()))
+                .apellidoPaterno(normalizarTexto(request.apellidoPaterno()))
+                .apellidoMaterno(normalizarTexto(request.apellidoMaterno()))
+                .email(normalizarTexto(request.email()))
+                .telefono(normalizarTexto(request.telefono()))
                 .build();
     }
 
+
     @Override
     public MaestroResponse entidadAResponse(Maestro entidad) {
-        if (entidad==null) return null;
+        if (entidad == null) return null;
 
-        List<DatosCurso> cursos=entidadADatoCurso(entidad);
+        List<DatosCurso> cursos = entidadADatoCurso(entidad);
 
-        return new MaestroResponse(entidad.getId(),String.join(
-                " ",entidad.getNombre()
-                , entidad.getApellidoPaterno()
-                ,entidad.getApellidoMaterno()
-                ),entidad.getEmail(),
-                entidad.getTelefono(),
-                cursos);
-
+        return new MaestroResponse(
+                entidad.getId(),
+                String.join(" ",
+                        normalizarTexto(entidad.getNombre()),
+                        normalizarTexto(entidad.getApellidoPaterno()),
+                        normalizarTexto(entidad.getApellidoMaterno())),
+                normalizarTexto(entidad.getEmail()),
+                normalizarTexto(entidad.getTelefono()),
+                cursos
+        );
     }
 
+    private List<DatosCurso> entidadADatoCurso(Maestro entidad) {
+        if (entidad == null || entidad.getGrupos() == null) return List.of();
 
-    private List <DatosCurso> entidadADatoCurso(Maestro entidad) {
-        if (entidad==null) return List.of();
-
-
-
-        return entidad.getGrupos().stream().map(Grupo::getCurso).map(cursoMapper::entidadADatosCurso).toList();
-
+        return entidad.getGrupos().stream()
+                .filter(grupo -> grupo != null && grupo.getCurso() != null)
+                .map(Grupo::getCurso)
+                .map(cursoMapper::entidadADatosCurso)
+                .filter(curso -> curso != null)
+                .toList();
     }
 
+    private String normalizarTexto(String valor) {
+        return valor == null ? "" : valor.trim();
+    }
 
 }
