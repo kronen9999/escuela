@@ -4,11 +4,13 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 @Schema(description = "Datos nesesarios para insertar un aula")
 public record AulaRequest(
 
         @Schema(description = "Nombre del aula",example = "Aula 101")
+        @Size(min = 1,max = 100,message ="El nombre del aula debe de estar entre 1 y 100 caracteres")
         @NotBlank(message = "El nombre no puede estar vacio")
         String nombre,
 

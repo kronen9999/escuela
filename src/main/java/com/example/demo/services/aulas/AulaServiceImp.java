@@ -55,6 +55,8 @@ public class AulaServiceImp implements AulaService {
 
         Aula aula = aulaMapper.requestAEntidad(request);
 
+        aula.validarDatos(request.nombre(),request.capacidad());
+
         aulaRepository.save(aula);
 
         return aulaMapper.entidadAResponse(aula);
@@ -66,9 +68,9 @@ public class AulaServiceImp implements AulaService {
 
         log.info("Actualizando aula con id: {}",id);
 
-        verificarActualizarDuplicado(request.nombre(),id);
-
         Aula aula=obtenerAulaPorId(id);
+
+        verificarActualizarDuplicado(request.nombre(),id);
 
         aula.actualizar(request.nombre(),request.capacidad());
 
@@ -105,7 +107,9 @@ public class AulaServiceImp implements AulaService {
 
         log.info("Verificando si hay otra aula con el nombre {}",nombre);
 
-     if (aulaRepository.existsByNombre(nombre)) throw new ConflictException("Esta sucursal ya tiene el nombre registrado ");
+     if (aulaRepository.existsByNombre(nombre))
+         throw new IllegalArgumentException("El nombre ya esta registrado por otra aula");
+
     }
 
     private void verificarActualizarDuplicado (String nombre,Long id)
@@ -114,14 +118,16 @@ public class AulaServiceImp implements AulaService {
         log.info("Verificando si el nombre es unico y no corresponde a otro id: nombre[{}] id [{}]",nombre,id);
 
        if (aulaRepository.existsByNombreAndIdNot(nombre,id))
-       throw new ConflictException("EL nombre proporcionado ya se encuentra en uso por otra aula");
+       throw new IllegalArgumentException("El nombre proporcionado ya se encuentra en uso por otra aula");
 
     }
 
     private void verificarAulaConGrupos(Long id)
     {
 
-        if (grupoRepository.existsByAulaId(id))throw  new ConflictException("El aula contiene grupos asociados");
+        if (grupoRepository.existsByAulaId(id))
+            throw new ConflictException("El aula contiene grupos asociados");
+
 
     }
 
