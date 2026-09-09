@@ -1,4 +1,4 @@
-package com.example.demo.dto.alumno.aula;
+package com.example.demo.dto.aula;
 
 public record AulaResponse(
 
@@ -6,6 +6,6 @@ public record AulaResponse(
 
         String nombre,
 
-        Short capacidad
+        Integer capacidad
 ) {
 }

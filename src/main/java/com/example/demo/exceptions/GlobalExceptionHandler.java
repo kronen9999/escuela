@@ -90,5 +90,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body(new CustomErrorResponse(HttpStatus.BAD_REQUEST.value(),"Se produjo un error en como el cliente envia sus datos"));
     }
+    @ExceptionHandler(ConflictException.class)
+    public ResponseEntity<CustomErrorResponse> handleConflicException(ConflictException e) {
+        log.error("Se ha producido un error interno de validacion:  {}", e.getMessage(), e);
+        return ResponseEntity.status(HttpStatus.CONFLICT)
+                .body(new CustomErrorResponse(HttpStatus.CONFLICT.value(),e.getMessage()));
+    }
 
 }
