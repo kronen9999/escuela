@@ -46,6 +46,7 @@ public class Alumno {
     @Column(name = "MATRICULA",length = 10,unique = true,nullable = false)
     private String matricula;
 
+    @Builder.Default
     @Column(name = "FECHA_INGRESO",length = 10)
     private LocalDate fechaIngreso=LocalDate.now();
 
