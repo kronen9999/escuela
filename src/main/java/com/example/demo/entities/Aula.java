@@ -1,6 +1,7 @@
 package com.example.demo.entities;
 
 
+import com.example.demo.utils.ObjectUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,9 +46,9 @@ public class Aula {
     public void validarDatos (String nombre,Integer capacidad)
     {
         log.info("Validando datos");
-        validarNull(nombre,"El campo de nombre no puede estar vacio");
+        ObjectUtils.validarNulls(nombre,"El campo de nombre no puede estar vacio");
 
-        validarNull(capacidad,"El campo de capacidad no puede estar vacio");
+        ObjectUtils.validarNulls(capacidad,"El campo de capacidad no puede estar vacio");
 
         validarCampos(nombre,capacidad);
 
@@ -55,15 +56,7 @@ public class Aula {
 
 
 
-    private void validarNull(Object object,String messageException)
-    {
 
-        log.info("validando que el objeto no este vacio...");
-
-        if (object == null)
-            throw  new IllegalArgumentException(messageException);
-
-    }
 
     private void validarCampos (String nombre, Integer capacidad)
     {
