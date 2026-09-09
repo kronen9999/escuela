@@ -20,7 +20,7 @@ public record CursoRequest(
         @Schema(description = "Creditos del curso",example = "5" )
         @NotNull(message = "Los creditos son requeridos")
         @Min(value = 1,message = "Los creditos minimos son 1")
-        @Max(value = 10,message = "Los creditos maximos son 10s")
+        @Max(value = 10,message = "Los creditos maximos son 10")
         Integer creditos
 
 
