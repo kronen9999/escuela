@@ -34,7 +34,8 @@ public class Curso {
     private String descripcion;
 
     @Column(name = "CREDITOS",nullable = false,precision = 2)
-    @Min(0)
+    @Min(1)
+    @Max(10)
     private  Integer creditos ;
 
 
@@ -50,7 +51,7 @@ public class Curso {
         this.descripcion=descripcion;
         this.creditos=creditos;
 
-        log.info("Curso actualizada correctamente");
+        log.info("Curso actualizado correctamente");
 
     }
 
@@ -73,8 +74,8 @@ public class Curso {
     {
         log.info("Validando los campos de nombre: "+ nombre + ", descripcion: "+descripcion +"y creditos: "+ creditos);
 
-        if (nombre.trim().length()>100||nombre.length()<=0)
-            throw  new IllegalArgumentException("El nombre debe de tener entre 1 y 100 caracteres");
+        if (nombre.trim().length() <= 5 || nombre.trim().length() >100)
+            throw  new IllegalArgumentException("El nombre debe de tener entre 5 y 100 caracteres"+ nombre.length());
 
         if (creditos<1||creditos>10)
             throw  new IllegalArgumentException("El rango valido para los creditos es de 1 - 10");

@@ -2,7 +2,6 @@ package com.example.demo.services.cursos;
 
 import com.example.demo.dto.curso.CursoRequest;
 import com.example.demo.dto.curso.CursoResponse;
-import com.example.demo.entities.Aula;
 import com.example.demo.entities.Curso;
 import com.example.demo.exceptions.ConflictException;
 import com.example.demo.exceptions.RecursoNoEncontradoException;
@@ -50,22 +49,27 @@ public class CursoServiceImp implements CursoService{
 
         Curso curso=obtenerCursoPorId(id);
 
-        verificarActualizarDuplicado(request.nombre(),id);
+        String nombre = request.nombre().trim();
+        String descripcion = request.descripcion() == null ? null : request.descripcion().trim();
 
-        curso.actualizar(request.nombre(),request.descripcion(),request.creditos());
+        verificarActualizarDuplicado(nombre,id);
+
+        curso.actualizar(nombre,descripcion,request.creditos());
 
         return cursoMapper.entidadAResponse(curso);
     }
 
     @Override
     public CursoResponse registrar(CursoRequest request) {
-        log.info("Registrando aula nueva");
+        log.info("Registrando curso nuevo");
 
-        validarNombreExistente(request.nombre());
+        String nombre = request.nombre().trim();
+        validarNombreExistente(nombre);
 
         Curso curso=cursoMapper.requestAEntidad(request);
 
-        curso.validarDatos(request.nombre(),request.descripcion(),request.creditos());
+        String descripcion = request.descripcion() == null ? null : request.descripcion().trim();
+        curso.validarDatos(nombre,descripcion,request.creditos());
 
         cursoRepository.save(curso);
 
@@ -83,7 +87,7 @@ public class CursoServiceImp implements CursoService{
     @Transactional(readOnly = true)
     @Override
     public List<CursoResponse> listar() {
-        log.info("Listado total de aulas");
+        log.info("Listando total de cursos");
 
         return cursoRepository.findAll().stream().map(cursoMapper::entidadAResponse).toList();
     }
@@ -100,9 +104,9 @@ public class CursoServiceImp implements CursoService{
     private void  validarNombreExistente(String nombre)
     {
 
-        log.info("Verificando si hay otra curso con el nombre {}",nombre);
+        log.info("Verificando si hay otro curso con el nombre {}",nombre);
 
-        if (cursoRepository.existsByNombre(nombre))
+        if (cursoRepository.existsByNombre(nombre.trim()))
             throw new IllegalArgumentException("El nombre ya esta registrado por otro curso");
 
     }
@@ -112,7 +116,7 @@ public class CursoServiceImp implements CursoService{
 
         log.info("Verificando si el nombre es unico y no corresponde a otro id: nombre[{}] id [{}]",nombre,id);
 
-        if (cursoRepository.existsByNombreAndIdNot(nombre,id))
+        if (cursoRepository.existsByNombreAndIdNot(nombre.trim(),id))
             throw new IllegalArgumentException("El nombre proporcionado ya se encuentra en uso por otro curso");
 
     }

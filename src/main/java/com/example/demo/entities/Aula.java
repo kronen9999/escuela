@@ -62,7 +62,7 @@ public class Aula {
     {
         log.info("Validando los campos de nombre: "+ nombre + "y capacidad "+capacidad);
 
-        if (nombre.trim().length()>=5||nombre.length()<=0)
+        if (nombre.trim().length()<=5||nombre.length()>100)
             throw  new IllegalArgumentException("El nombre debe de tener entre 5 y 100 caracteres");
 
         if (capacidad<0)
