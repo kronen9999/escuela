@@ -2,12 +2,9 @@ package com.example.demo.dto.grupo;
 
 import com.example.demo.dto.grupo.datos.GrupoAulaDto;
 import com.example.demo.dto.grupo.datos.GrupoCursoDto;
-import com.example.demo.dto.grupo.datos.GrupoHorarioDto;
 import com.example.demo.dto.grupo.datos.GrupoMaestroDto;
-import com.example.demo.entities.Curso;
-import com.example.demo.entities.Horario;
-import com.example.demo.entities.Maestro;
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 
 @Schema(description = "Campos que debe de contener el response de grupo")
 public record GrupoResponse(
@@ -24,7 +21,8 @@ public record GrupoResponse(
         @Schema(description = "Objeto aula")
         GrupoAulaDto aula,
 
-        //Pendiente lista de horarios
+        @Schema(description = "Lista de horarios")
+        List<String> horarios,
 
         @Schema(description = "Periodo del grupo",example = "2026-01")
         String periodo

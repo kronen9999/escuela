@@ -6,17 +6,20 @@ import com.example.demo.dto.grupo.GrupoResponse;
 import com.example.demo.dto.grupo.datos.GrupoAulaDto;
 import com.example.demo.dto.grupo.datos.GrupoCursoDto;
 import com.example.demo.dto.grupo.datos.GrupoMaestroDto;
-import com.example.demo.entities.Aula;
-import com.example.demo.entities.Curso;
-import com.example.demo.entities.Grupo;
-import com.example.demo.entities.Maestro;
+import com.example.demo.entities.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
+
+import java.util.List;
+
+@Slf4j
 @Component
 public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Grupo> {
 
     @Override
     public Grupo requestAEntidad(GrupoRequest request) {
+
         return requestAEntidad(
                 request,
                 Curso.builder().id(request.idCurso()).build(),
@@ -44,12 +47,17 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     @Override
     public GrupoResponse entidadAResponse(Grupo grupo) {
+
+        List<String> horarios=grupo.getHorarios().stream().map(this::horarioAString).toList();
+
         return new GrupoResponse(
                 grupo.getId(),
                 cursoAGrupoCurso(grupo.getCurso()),
                 maestroAGrupoMaestro(grupo.getMaestro()),
                 aulaAGrupoAula(grupo.getAula()),
+                horarios,
                 grupo.getPeriodo()
+
         );
     }
 
@@ -83,6 +91,13 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
                 aula.getNombre(),
                 aula.getCapacidad()
         );
+    }
+
+    private String horarioAString(Horario horario){
+
+        log.info("Convirtiendo la lista");
+        return String.join("",horario.getDiaSemana().getDescripcion(),horario.getHoraInicio(),"-",horario.getHorFIn());
+
     }
 
 
