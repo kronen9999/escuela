@@ -42,7 +42,7 @@ public class AlumnoMapper implements  CommonMapper<AlumnoRequest, AlumnoResponse
 
         return new AlumnoResponse(
                 entidad.getId(),
-                String.join(
+                String.join(" ",
                         entidad.getNombre(),
                         entidad.getApellidoPaterno(),
                         entidad.getApellidoMaterno()),
