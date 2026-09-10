@@ -112,7 +112,7 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
         return horario.getDiaSemana().getDescripcion()
                 + " " + horario.getHoraInicio()
-                + " - " + horario.getHorFIn();
+                + " - " + horario.getHoraFIn();
 
     }
 

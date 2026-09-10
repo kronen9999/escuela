@@ -31,5 +31,5 @@ public class Horario {
     private String horaInicio;
 
     @Column(name = "HORA_FIN",length = 5,nullable = false)
-    private String horFIn;
+    private String horaFIn;
 }
