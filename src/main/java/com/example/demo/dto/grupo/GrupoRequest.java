@@ -7,18 +7,18 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
-@Schema(description = "Campos que debe de contener el request de Grupo")
+@Schema(description = "Datos necesarios para registrar o actualizar un grupo")
 public record GrupoRequest
         (
-                @NotNull(message = "El id del curso no debe debe estar vacio")
+                @NotNull(message = "El id del curso es obligatorio")
                 @Schema(description = "Id del curso",example = "4")
                 Long idCurso,
 
-                @NotNull(message = "El id del maestro no debe debe estar vacio")
+                @NotNull(message = "El id del maestro es obligatorio")
                 @Schema(description = "Id del maestro",example = "2")
                 Long idMaestro,
 
-                @NotNull(message = "El id del aula no debe debe estar vacia")
+                @NotNull(message = "El id del aula es obligatorio")
                 @Schema(description = "Id del aula",example = "8")
                 Long idAula,
 

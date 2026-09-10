@@ -49,7 +49,7 @@ public class GrupoServiceImp implements  GrupoService{
     @Override
     public GrupoResponse obtenerPorId(Long id) {
 
-        log.info("Busanco el grupo con id {}",id);
+        log.info("Buscando el grupo con id {}", id);
 
         return grupoMapper.entidadAResponse(buscarGrupoId(id));
 
@@ -91,7 +91,7 @@ public class GrupoServiceImp implements  GrupoService{
     @Override
     public GrupoResponse actualizar(GrupoRequest request, long id) {
 
-        log.info("Actulizando grupo con id: {}",id);
+        log.info("Actualizando grupo con id: {}", id);
 
         Grupo grupo=buscarGrupoId(id);
 

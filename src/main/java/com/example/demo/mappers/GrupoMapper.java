@@ -7,13 +7,11 @@ import com.example.demo.dto.grupo.datos.GrupoAulaDto;
 import com.example.demo.dto.grupo.datos.GrupoCursoDto;
 import com.example.demo.dto.grupo.datos.GrupoMaestroDto;
 import com.example.demo.entities.*;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
-
 import java.util.List;
+import java.util.Objects;
 
-@Slf4j
 @Component
 public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Grupo> {
 
@@ -47,8 +45,16 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     @Override
     public GrupoResponse entidadAResponse(Grupo grupo) {
+        if (grupo == null) {
+            return null;
+        }
 
-        List<String> horarios=grupo.getHorarios().stream().map(this::horarioAString).toList();
+        List<String> horarios = grupo.getHorarios() == null
+                ? List.of()
+                : grupo.getHorarios().stream()
+                        .filter(Objects::nonNull)
+                        .map(this::horarioAString)
+                        .toList();
 
         return new GrupoResponse(
                 grupo.getId(),
@@ -63,6 +69,9 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     private GrupoCursoDto cursoAGrupoCurso(Curso curso)
     {
+        if (curso == null) {
+            return null;
+        }
 
         return new GrupoCursoDto(
                 curso.getNombre(),
@@ -74,6 +83,9 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     private GrupoMaestroDto maestroAGrupoMaestro(Maestro maestro)
     {
+        if (maestro == null) {
+            return null;
+        }
 
         return new GrupoMaestroDto(
                 String.join(" ",
@@ -86,6 +98,9 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     private GrupoAulaDto aulaAGrupoAula(Aula aula)
     {
+        if (aula == null) {
+            return null;
+        }
 
         return new GrupoAulaDto(
                 aula.getNombre(),
@@ -95,8 +110,9 @@ public class GrupoMapper implements CommonMapper<GrupoRequest, GrupoResponse, Gr
 
     private String horarioAString(Horario horario){
 
-        log.info("Convirtiendo la lista");
-        return String.join("",horario.getDiaSemana().getDescripcion(),horario.getHoraInicio(),"-",horario.getHorFIn());
+        return horario.getDiaSemana().getDescripcion()
+                + " " + horario.getHoraInicio()
+                + " - " + horario.getHorFIn();
 
     }
 
