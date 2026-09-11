@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 public enum DiaSemana {
-    Lunes ("Lunes"),
-    Martes("Martes"),
-    Miercoles ("Miercoles"),
-    Jueves("Jueves"),
-    Viernes("Viernes"),
-    Sabado("Sabado");
+    LUNES ("Lunes"),
+    MARTES("Martes"),
+    MIERCOLES ("Miercoles"),
+    JUEVES("Jueves"),
+    VIERNES("Viernes"),
+    SABADO("Sabado");
 
     private  final String descripcion;
 

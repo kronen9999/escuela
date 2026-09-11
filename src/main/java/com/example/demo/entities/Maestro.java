@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import com.example.demo.utils.StringCustomUtils;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -42,5 +43,25 @@ public class Maestro {
     @OneToMany (mappedBy = "maestro",fetch = FetchType.LAZY)
     private List <Grupo> grupos = new ArrayList<>();
 
+
+    public  void validarDatos(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String telefono) {
+
+        StringCustomUtils.validarTamanio(nombre,1,50,"El nombre es requerido y debe tener entre 1 y 50 caracteres");
+        StringCustomUtils.validarTamanio(apellidoPaterno,1,50,"El apellido paterno es requerido y debe tener entre 1 y 50 caracteres");
+        StringCustomUtils.validarTamanio(apellidoMaterno,1,50,"El apellido materno es requerido  y debe tener entre 1 y 50 caracteres");
+        StringCustomUtils.validarTamanio(email,8,100,"El correo es requerido y debe tener entre 1 y 100 caracteres");
+        StringCustomUtils.validarTamanio(telefono,10,10,"El telefono es requerido y debe tener 10 digitos");
+    }
+
+    public  void actulizar(String nombre, String apellidoPaterno, String apellidoMaterno, String email, String telefono) {
+
+        validarDatos(nombre,apellidoPaterno,apellidoMaterno,email,telefono);
+
+        this.nombre=nombre.trim();
+        this.apellidoPaterno=apellidoPaterno.trim();
+        this.apellidoMaterno=apellidoMaterno.trim();
+        this.email=email.toLowerCase();
+        this.telefono=telefono.trim();
+    }
 
 }

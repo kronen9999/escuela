@@ -32,5 +32,9 @@ public class Calificacion {
     @JoinColumn(name = "ID_INSCRIPCION",nullable = false,unique = true)
     private Inscripcion inscripcion;
 
+    public void actualizar(Inscripcion inscripcion, BigDecimal calificacion) {
+        this.inscripcion = inscripcion;
+        this.califiacion = calificacion;
+    }
 
 }

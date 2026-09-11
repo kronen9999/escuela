@@ -33,10 +33,15 @@ public class Inscripcion {
     private  Grupo grupo ;
 
     @Builder.Default
-    @JoinColumn(name = "FECHA_INSCRIPCION")
+    @Column(name = "FECHA_INSCRIPCION",length = 10)
     private LocalDate fechaInscripcion= LocalDate.now();
 
     @OneToOne(mappedBy = "inscripcion")
     private Calificacion caalificacion;
+
+    public void actualizar(Alumno alumno, Grupo grupo) {
+        this.alumno = alumno;
+        this.grupo = grupo;
+    }
 
 }
