@@ -9,4 +9,8 @@ public interface InscripcionRepository extends JpaRepository<Inscripcion,Long> {
     boolean existsByAlumnoId(Long  idAlumno);
 
     boolean  existsByGrupoId (Long id);
+
+    boolean existsByAlumnoIdAndGrupoId(Long idAlumno, Long idGrupo);
+
+    boolean existsByAlumnoIdAndGrupoIdAndIdNot(Long idAlumno, Long idGrupo, Long id);
 }
