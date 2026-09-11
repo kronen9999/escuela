@@ -4,7 +4,6 @@ import com.example.demo.dto.alumno.AlumnoRequest;
 import com.example.demo.dto.alumno.AlumnoResponse;
 import com.example.demo.dto.datos.DatosCalificacion;
 import com.example.demo.entities.Alumno;
-import com.example.demo.entities.Inscripcion;
 import com.example.demo.utils.StringCustomUtils;
 import org.springframework.stereotype.Component;
 

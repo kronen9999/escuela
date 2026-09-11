@@ -1,14 +1,9 @@
 package com.example.demo.dto.alumno;
 
 import com.example.demo.dto.datos.DatosCalificacion;
-import com.example.demo.dto.datos.DatosCurso;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.util.List;
 
 @Schema(description = "Descripcion del alumno")

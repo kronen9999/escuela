@@ -1,12 +1,8 @@
 package com.example.demo.dto.alumno;
 
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
-
-import java.time.LocalDate;
 
 @Schema(description = "Datos nesesarios para insertar o actualizar un alumno")
 public record AlumnoRequest(

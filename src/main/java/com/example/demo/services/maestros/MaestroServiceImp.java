@@ -46,7 +46,7 @@ public class MaestroServiceImp  implements  MaestroService{
     public MaestroResponse registrar(MaestroRequest request) {
         log.info("Registrando nuevo maestro");
 
-        //validar datos
+
 
         validarDatosUnicos(request);
 
@@ -56,7 +56,7 @@ public class MaestroServiceImp  implements  MaestroService{
 
         log.info("Nuevo maestro {} registrado",maestro.getNombre());
 
-        return null;
+        return maestroMapper.entidadAResponse(maestro);
     }
 
     @Override

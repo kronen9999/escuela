@@ -5,7 +5,6 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
-import jdk.jfr.Description;
 
 @Schema(description = "Datos nesesarios para registrar o actualizar un maestro")
 public record MaestroRequest(
@@ -29,7 +28,6 @@ public record MaestroRequest(
         @Schema(description = "Email del maestro",example = "test.test.com")
         @NotBlank(message = "El email es obligatorio")
         @Email(message = "El email debe de tener el formato adecuado")
-        @Email(message = "El emaul debe de tener un formato valido ejemplo (test@test.com)")
         String email,
 
         @Schema(description = "Telefono del maestro",example = "1234567890")
